@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="ar">
 <head>
@@ -176,45 +178,36 @@ body{
     عارف بحس إن الدنيا كلها معايا علشان انت معايا انت بالدنيا كلها. يمكن انت عصبي شوية بس الحقيقة مفيش أحن ولا أطيب منك، وحنانك بيخليني أحبك أكتر كل يوم.  
     عارف كل ضحكة منك و كل كلمة حلوة و كل لمسة منك بتخليني أحس إني محظوظة جدًا إني عندي حد زيك في حياتي. بحب وجودك معايا و بحب وقتنا مع بعض و بحب كل التفاصيل الصغيرة فيك اللي بتخلي قلبي يفرح.  
     معاك مش عاوزه اي حاجه تانيه من الدنيا غير طفل منك يربطنا اكتر ببعض. كل لحظة معاك هتفضل محفورة في قلبي.. بحبك اوي يمحمد وبوعدك إني دايمًا هفضل في ظهرك ومعاك ونكمل حياتنا مع بعض بحب وفرحة وسعادة 💖
- ربنا يخليك ليا وميحرمنيش من وجودك ابدا يحبيب عيوني 
-❤️ بحبك
-  </p>
+    ربنا يخليك ليا وميحرمنيش من وجودك ابدا يحبيب عيوني ❤️ بحبك
+    </p>
   </div>
 </div>
 
 <!-- Music -->
-<audio id="song" loop>
+<audio id="song" loop preload="auto">
   <source src="sounds/habibi.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-const startBtn=document.getElementById("startAlbum");
-const intro=document.getElementById("intro");
-const album=document.getElementById("album");
-const finalMessage=document.getElementById("finalMessage");
-const pages=document.querySelectorAll(".page");
-const song=document.getElementById("song");
-const finalContainer=document.getElementById("finalContainer");
+const startBtn = document.getElementById("startAlbum");
+const intro = document.getElementById("intro");
+const album = document.getElementById("album");
+const pages = document.querySelectorAll(".page");
+const song = document.getElementById("song");
+const finalContainer = document.getElementById("finalContainer");
 
-let currentPage=0;
+let currentPage = 0;
 
-startBtn.addEventListener("click",()=>{
+startBtn.addEventListener("click", () => {
   intro.classList.remove("active");
   album.classList.add("active");
   pages[currentPage].classList.add("active");
 
-  // تشغيل الصوت مع fade-in خفيف
-  song.volume = 0;
-  song.play().catch(()=>{});
-  let vol = 0;
-  const fade = setInterval(()=>{
-    if(vol < 1){
-      vol += 0.05;
-      song.volume = vol;
-    } else {
-      clearInterval(fade);
-    }
-  }, 200);
+  // تشغيل الصوت بعد تفاعل المستخدم
+  if(song.paused){
+    song.play().catch(()=>{console.log("المتصفح منع التشغيل التلقائي، اضغط على أي زر");});
+  }
+  song.loop = true;
 });
 
 // الصفحات
@@ -227,14 +220,13 @@ pages.forEach((page,index)=>{
         pages[currentPage].classList.add("active");
       } else {
         album.classList.remove("active");
-        finalMessage.classList.add("active");
-        finalContainer.classList.add("show"); // ظهور الرسالة مع تأثير
+        finalContainer.classList.add("show"); // ظهور الرسالة
       }
     }
   });
 });
 
-// إنشاء القلوب الحمراء المتطايرة
+// القلوب الحمراء
 function createHeart(){
   const heart=document.createElement("div");
   heart.classList.add("heart");
@@ -248,5 +240,4 @@ setInterval(createHeart,300);
 </script>
 
 </body>
-
 </html>
